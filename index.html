@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Task List</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card text-center col-md mt-2 bg-info text-light p-2">
+        <h3 style="margin-bottom:0;">Kanban</h3>
+    </div>
+
+    <div class="container-lg mt-2">
+        <div class="row">
+            <div class="col-lg">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5>To Do</h5>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <ul id="Task-List" class="dropzone list-group list-group-flush list-group-item-action"
+                        style="min-height: 200px">
+                        <li class="draggable list-group-item list-group-item-action" draggable="true">
+                            1
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5>In Progress</h5>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <ul id="Task-List-1" class="dropzone list-group list-group-flush list-group-item-action"
+                        style="min-height: 200px">
+                        <li class="draggable list-group-item list-group-item-action" draggable="true">
+                            1
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h5>Done</h5>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <ul id="Task-List-2" class="dropzone list-group list-group-flush list-group-item-action"
+                        style="min-height: 200px">
+                        <li class="draggable list-group-item list-group-item-action" draggable="true">
+                            1
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="col-lg">    <button id="addbutton" type="button" class="btn btn-info btn-floating" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+    <i class="fa-solid fa-plus"></i>
+</button></div>
+
+
+    <div class="modal top" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-mdb-backdrop="true" data-mdb-keyboard="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a Task</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" class="d-flex justify-content-between">
+                        <div class="form-outline w-100">
+                            <input type="text" id="New-Task" class="form-control" />
+                            <label class="form-label" for="form12">Add a new task...</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary d-none" data-mdb-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-info btn-floating" data-mdb-toggle="modal"
+                        data-mdb-target="#exampleModal">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+
+    <script src="./script.js" type="text/javascript"></script>
+</body>
+
+</html>
