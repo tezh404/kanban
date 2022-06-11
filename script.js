@@ -21,6 +21,12 @@ function eventListeners() {
 
 function addTask(e) {
 
+  if (newTaskInput.value === '') {
+    alert('Please add a task');
+  }else{
+
+    console.log(newTaskInput.value);
+
     const li = document.createElement('li');
     li.className = 'draggable list-group-item list-group-item-action d-flex justify-content-between';
     li.setAttribute('draggable', 'true');
@@ -31,6 +37,7 @@ function addTask(e) {
     setItemToLS(newTaskInput.value);
     newTaskInput.value = '';
     e.preventDefault();
+  }
 }
 
 function loadItems() {
