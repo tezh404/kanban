@@ -44,7 +44,7 @@
                 <div class="mt-3">
                     <ul id="toDo" class="dropzone list-group list-group-flush list-group-item-action"
                         style="min-height: 60vh; background-color: rgba(255, 255, 255, 0.692);">
-                        
+
                     </ul>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="mt-3">
                     <ul id="inProgress" class="dropzone list-group list-group-flush list-group-item-action"
                         style="min-height: 60vh; background-color: rgba(255, 255, 255, 0.692);">
-                        
+
                     </ul>
                 </div>
             </div>
@@ -70,15 +70,16 @@
                 <div class="mt-3">
                     <ul id="done" class="dropzone list-group list-group-flush list-group-item-action"
                         style="min-height: 60vh; background-color: rgba(255, 255, 255, 0.692);">
-                        
+
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-<div class="col-lg">    <button id="addbutton" type="button" class="btn btn-info btn-floating" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    <i class="fa-solid fa-plus"></i>
-</button></div>
+    <div class="col-lg"> <button id="addbutton" type="button" class="btn btn-info btn-floating" data-mdb-toggle="modal"
+            data-mdb-target="#exampleModal">
+            <i class="fa-solid fa-plus"></i>
+        </button></div>
 
 
     <div class="modal top" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -98,18 +99,19 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <select onChange="categories()" id="optionSelect" class="form-select" multiple aria-label="multiple select example">
-                        <option  selected value="toDo">To Do</option>
+                    <select  id="optionSelect" class="form-select" multiple
+                        aria-label="multiple select example">
+                        <option selected value="toDo">To Do</option>
                         <option value="inProgress">In Progress</option>
                         <option value="done">Done</option>
-                      </select>
+                    </select>
                     <button type="button" class="btn btn-secondary d-none" data-mdb-dismiss="modal">
                         Close
                     </button>
-                    <button type="button" class="btn btn-info btn-floating" data-mdb-toggle="modal"
+                    <!-- <button type="submit" class="btn btn-info btn-floating" data-mdb-toggle="modal"
                         data-mdb-target="#exampleModal">
                         <i class="fa-solid fa-plus"></i>
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>

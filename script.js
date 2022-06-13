@@ -1,54 +1,46 @@
-// Add Task
-
 const form = document.querySelector("form");
 const newTaskInput = document.querySelector("#New-Task");
-const delteToDo = document.querySelector("#toDo");
-const delteinProgress = document.querySelector("#inProgress");
-const delteDone = document.querySelector("#done");
+const delToDo = document.querySelector("#toDo");
+const delinProgress = document.querySelector("#inProgress");
+const delDone = document.querySelector("#done");
 
-function categories() {
-  let optionSelect = document.querySelector("#optionSelect");
-  var value = optionSelect.options[optionSelect.selectedIndex].value;
-  if (value === "toDo") {
-    return document.querySelector("#toDo");
-  } else if (value === "inProgress") {
-    return document.querySelector("#inProgress");
-  } else if (value === "done") {
-    return document.querySelector("#done");
-  }
-}
+// Load items
 
 loadItems();
+
+// Load Event Listeners
+
 eventListeners();
 
+// Event Listeners
+
 function eventListeners() {
+  // add a new task listener
+
   form.addEventListener("submit", addTask);
 
-  // delete an item
-  delteToDo.addEventListener("click", deleteItem);
-  delteinProgress.addEventListener("click", deleteItem);
-  delteDone.addEventListener("click", deleteItem);
+  // delete an item listener
+
+  delToDo.addEventListener("click", deleteItem);
+  delinProgress.addEventListener("click", deleteItem);
+  delDone.addEventListener("click", deleteItem);
 }
+
+// Add a new task
 
 function addTask(e) {
   if (newTaskInput.value === "") {
     alert("Please add a task");
   } else {
-    const li = document.createElement("li");
-    li.className =
-      "draggable list-group-item list-group-item-action d-flex justify-content-between";
-    li.setAttribute("draggable", "true");
-    li.innerHTML = newTaskInput.value;
-    reo = '<i class="fa-solid fa-xmark"></i>';
-    li.innerHTML += reo;
-    let categorie = categories();
-    categorie.appendChild(li);
-    categ = optionSelect.options[optionSelect.selectedIndex].value;
-    setItemToLS(categ, newTaskInput.value);
+    const categories = optionSelect.options[optionSelect.selectedIndex].value;
+    createItem(newTaskInput.value, categories);
+    setItemToLS(categories, newTaskInput.value);
     newTaskInput.value = "";
     e.preventDefault();
   }
 }
+
+// Load items
 
 function loadItems() {
   toDo = getItemsFromLStoDo();
@@ -140,30 +132,26 @@ function deleteItemFromLS(text, cater) {
   }
 }
 
-function createItem(text, catesy) {
+function createItem(text, catesgorie) {
   // create li
   const li = document.createElement("li");
   li.className =
     "draggable list-group-item list-group-item-action d-flex justify-content-between";
   li.setAttribute("draggable", "true");
-  li.innerHTML = newTaskInput.value;
   li.appendChild(document.createTextNode(text));
   reo = '<i class="fa-solid fa-xmark"></i>';
   li.innerHTML += reo;
-  document.getElementById(catesy).appendChild(li);
+  document.getElementById(catesgorie).appendChild(li);
 }
 
 function deleteItem(e) {
   if (e.target.className === "fa-solid fa-xmark") {
     let cater = e.target.parentNode;
     cater = cater.parentElement.id;
-    console.log(cater);
 
     e.target.parentElement.remove();
 
     // delete item from LS
-
-    // cater = cater.parentElement;
 
     let textCont = e.target.parentElement.textContent;
 
