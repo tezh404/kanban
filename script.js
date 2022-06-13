@@ -4,8 +4,6 @@ const delToDo = document.querySelector("#toDo");
 const delinProgress = document.querySelector("#inProgress");
 const delDone = document.querySelector("#done");
 
-
-
 // Load items
 
 loadItems();
