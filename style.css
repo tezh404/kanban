@@ -21,6 +21,22 @@
   width: 4rem;
   height: 4rem;
 }
+.header {
+  background: linear-gradient(90deg,
+      rgb(8, 130, 251) 0%,
+      rgba(155, 0, 250, 1) 100%);
+
+
+}
+
+i {
+  font-size: 1.5rem;
+}
+
+li {
+  font-size: 1.25rem;
+}
+
 /* 
 
 #Task-List-2 > li {

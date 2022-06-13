@@ -2,6 +2,9 @@
 
 const form = document.querySelector("form");
 const newTaskInput = document.querySelector("#New-Task");
+const delteToDo = document.querySelector("#toDo");
+const delteinProgress = document.querySelector("#inProgress");
+const delteDone = document.querySelector("#done");
 
 function categories() {
   let optionSelect = document.querySelector("#optionSelect");
@@ -13,9 +16,7 @@ function categories() {
   } else if (value === "done") {
     return document.querySelector("#done");
   }
-};
-
-let items;
+}
 
 loadItems();
 eventListeners();
@@ -24,7 +25,9 @@ function eventListeners() {
   form.addEventListener("submit", addTask);
 
   // delete an item
-  toDo.addEventListener("click", deleteItem);
+  delteToDo.addEventListener("click", deleteItem);
+  delteinProgress.addEventListener("click", deleteItem);
+  delteDone.addEventListener("click", deleteItem);
 }
 
 function addTask(e) {
@@ -40,48 +43,104 @@ function addTask(e) {
     li.innerHTML += reo;
     let categorie = categories();
     categorie.appendChild(li);
-    setItemToLS(newTaskInput.value);
+    categ = optionSelect.options[optionSelect.selectedIndex].value;
+    setItemToLS(categ, newTaskInput.value);
     newTaskInput.value = "";
     e.preventDefault();
   }
 }
 
 function loadItems() {
-  items = getItemsFromLS();
-  items.forEach(function (item) {
-    createItem(item);
+  toDo = getItemsFromLStoDo();
+  inProgress = getItemsFromLSinProgress();
+  done = getItemsFromLSdone();
+
+  toDo.forEach(function (item) {
+    createItem(item, "toDo");
+  });
+
+  inProgress.forEach(function (item) {
+    createItem(item, "inProgress");
+  });
+
+  done.forEach(function (item) {
+    createItem(item, "done");
   });
 }
 
 // get items from Local Storage
-function getItemsFromLS() {
-  if (localStorage.getItem("items") === null) {
-    items = [];
+function getItemsFromLStoDo() {
+  if (localStorage.getItem("toDo") === null) {
+    toDo = [];
   } else {
-    items = JSON.parse(localStorage.getItem("items"));
+    toDo = JSON.parse(localStorage.getItem("toDo"));
   }
-  return items;
+  return toDo;
+}
+function getItemsFromLSinProgress() {
+  if (localStorage.getItem("inProgress") === null) {
+    inProgress = [];
+  } else {
+    inProgress = JSON.parse(localStorage.getItem("inProgress"));
+  }
+  return inProgress;
+}
+function getItemsFromLSdone() {
+  if (localStorage.getItem("done") === null) {
+    done = [];
+  } else {
+    done = JSON.parse(localStorage.getItem("done"));
+  }
+  return done;
 }
 
 // set item to Local Storage
-function setItemToLS(text) {
-  items = getItemsFromLS();
-  items.push(text);
-  localStorage.setItem("items", JSON.stringify(items));
+function setItemToLS(categ, text) {
+  if (categ === "toDo") {
+    toDo = getItemsFromLStoDo();
+    toDo.push(text);
+    localStorage.setItem("toDo", JSON.stringify(toDo));
+  } else if (categ === "inProgress") {
+    inProgress = getItemsFromLSinProgress();
+    inProgress.push(text);
+    localStorage.setItem("inProgress", JSON.stringify(inProgress));
+  } else if (categ === "done") {
+    done = getItemsFromLSdone();
+    done.push(text);
+    localStorage.setItem("done", JSON.stringify(done));
+  }
 }
 
 // delete item from LS
-function deleteItemFromLS(text) {
-  items = getItemsFromLS();
-  items.forEach(function (item, index) {
-    if (item === text) {
-      items.splice(index, 1);
-    }
-  });
-  localStorage.setItem("items", JSON.stringify(items));
+function deleteItemFromLS(text, cater) {
+  if (cater === "toDo") {
+    toDo = getItemsFromLStoDo();
+    toDo.forEach(function (item, index) {
+      if (item === text) {
+        toDo.splice(index, 1);
+      }
+    });
+    localStorage.setItem("toDo", JSON.stringify(toDo));
+  } else if (cater === "inProgress") {
+    inProgress = getItemsFromLSinProgress();
+    inProgress.forEach(function (item, index) {
+      if (item === text) {
+        inProgress.splice(index, 1);
+      }
+    });
+    localStorage.setItem("inProgress", JSON.stringify(inProgress));
+  } else if (cater === "done") {
+    done = getItemsFromLSdone();
+    done.forEach(function (item, index) {
+      if (item === text) {
+        done.splice(index, 1);
+      }
+    });
+    localStorage.setItem("done", JSON.stringify(done));
+  }
 }
 
-function createItem(text) {
+function createItem(text, catesy) {
   // create li
   const li = document.createElement("li");
   li.className =
@@ -90,16 +149,25 @@ function createItem(text) {
   li.innerHTML = newTaskInput.value;
   li.appendChild(document.createTextNode(text));
   reo = '<i class="fa-solid fa-xmark"></i>';
-  li.innerHTML += reo; // add categories
-  toDo.appendChild(li);
+  li.innerHTML += reo;
+  document.getElementById(catesy).appendChild(li);
 }
 
 function deleteItem(e) {
   if (e.target.className === "fa-solid fa-xmark") {
+    let cater = e.target.parentNode;
+    cater = cater.parentElement.id;
+    console.log(cater);
+
     e.target.parentElement.remove();
 
     // delete item from LS
-    deleteItemFromLS(e.target.parentElement.textContent);
+
+    // cater = cater.parentElement;
+
+    let textCont = e.target.parentElement.textContent;
+
+    deleteItemFromLS(textCont, cater);
   }
   e.preventDefault();
 }
