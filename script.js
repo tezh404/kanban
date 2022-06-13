@@ -4,6 +4,8 @@ const delToDo = document.querySelector("#toDo");
 const delinProgress = document.querySelector("#inProgress");
 const delDone = document.querySelector("#done");
 
+
+
 // Load items
 
 loadItems();
@@ -24,6 +26,27 @@ function eventListeners() {
   delToDo.addEventListener("click", deleteItem);
   delinProgress.addEventListener("click", deleteItem);
   delDone.addEventListener("click", deleteItem);
+
+
+  document.addEventListener('dragstart', (e) => {
+    e.target.classList.add('dragging');
+    const textValue = e.target.textContent;
+    console.log(textValue);
+    const categories = e.target.parentElement.id;
+    console.log(categories);
+    deleteItemFromLS(textValue, categories);
+  })
+  
+  document.addEventListener('dragend', (e) => {
+    e.target.classList.remove('dragging');
+    const textValue1 = e.target.textContent;
+    console.log(textValue1);
+    const categories2 = e.target.parentElement.id;
+    console.log(categories2);
+    setItemToLS(categories2, textValue1);
+    
+  })
+  
 }
 
 // Add a new task
@@ -47,15 +70,15 @@ function loadItems() {
   inProgress = getItemsFromLSinProgress();
   done = getItemsFromLSdone();
 
-  toDo.forEach(function (item) {
+  toDo.forEach((item) => {
     createItem(item, "toDo");
   });
 
-  inProgress.forEach(function (item) {
+  inProgress.forEach((item) => {
     createItem(item, "inProgress");
   });
 
-  done.forEach(function (item) {
+  done.forEach((item) => {
     createItem(item, "done");
   });
 }
@@ -142,6 +165,7 @@ function createItem(text, catesgorie) {
   reo = '<i class="fa-solid fa-xmark"></i>';
   li.innerHTML += reo;
   document.getElementById(catesgorie).appendChild(li);
+
 }
 
 function deleteItem(e) {
@@ -163,18 +187,12 @@ function deleteItem(e) {
 let draggables = document.querySelectorAll(".draggable");
 let containers = document.querySelectorAll(".dropzone");
 
-draggables.forEach((draggable) => {
-  draggable.addEventListener("dragstart", () => {
-    draggable.classList.add("dragging");
-  });
 
-  draggable.addEventListener("dragend", () => {
-    draggable.classList.remove("dragging");
-  });
-});
+
 
 containers.forEach((container) => {
   container.addEventListener("dragover", (e) => {
+
     e.preventDefault();
     const afterElement = getDragAfterElement(container, e.clientY);
     const draggable = document.querySelector(".dragging");
@@ -183,6 +201,8 @@ containers.forEach((container) => {
     } else {
       container.insertBefore(draggable, afterElement);
     }
+    
+    
   });
 });
 
