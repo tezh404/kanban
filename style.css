@@ -60,7 +60,9 @@ li {
 
 } */
 
-
+select {
+    overflow-y: auto;
+}
 
 li:nth-child(4n + 0) {
   color: aliceblue;
